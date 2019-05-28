@@ -8,6 +8,7 @@ const config = {
     channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,
     channelSecret: process.env.CHANNEL_SECRET
 };
+const base_url = process.env.BASE_URL;
 
 const client = new line.Client(config);
 
@@ -58,7 +59,7 @@ module.exports = clova.Client
         } else if (place === "国内") {
           type = "domestic";
         } else {
-          placeSpeech.push(clova.SpeechBuilder.createSpeechText('聞き取れませんでした。もう一度お願いします。'));
+          placeSpeech.push(clova.SpeechBuilder.createSpeechText('聞き取れませんでした。もう一度お願いします。行き先は国内ですか？海外ですか？'));
           responseHelper.setSpeechList(placeSpeech);
           return;
         }
@@ -82,8 +83,8 @@ module.exports = clova.Client
         break;
         
       default:
-        responseHelper.setSimpleSpeech(clova.SpeechBuilder.createSpeechText('はいか、いいえで答えてください。'));
-        responseHelper.setReprompt(getRepromptMsg(clova.SpeechBuilder.createSpeechText('はいか、いいえで答えてください。')));
+        responseHelper.setSimpleSpeech(clova.SpeechBuilder.createSpeechText('行き先は国内ですか？海外ですか？'));
+        responseHelper.setReprompt(getRepromptMsg(clova.SpeechBuilder.createSpeechText('行き先は国内ですか？海外ですか？')));
         break;
     }
   })
@@ -119,11 +120,11 @@ const getPlanJson = (jsonData) => {
   // LIFFで申込情報入力
   const informationLiff = process.env.INFO_LIFF_URI;
   // LIFFでツアー詳細
-  const tourLiff = process.env.TOUR_LIFF_URI + '?tour=' + encodeURIComponent(jsonData.tour);
+  const tourLiff = process.env.TOUR_LIFF_URI + '?tour=' + jsonData.id;
   // LIFFでホテル詳細
-  const hotelLiff = process.env.HOTEL_LIFF_URI + '?hotel=' + encodeURIComponent(jsonData.hotel);
+  const hotelLiff = process.env.HOTEL_LIFF_URI + '?hotel=' + jsonData.id;
   // LIFFで航空会社詳細
-  const airlineLiff = process.env.AIRLINE_LIFF_URI + '?airline=' + encodeURIComponent(jsonData.airline);
+  const airlineLiff = process.env.AIRLINE_LIFF_URI + '?airline=' + jsonData.id;
   return {
     "type": "bubble",
     "header": {
@@ -138,7 +139,7 @@ const getPlanJson = (jsonData) => {
     },
     "hero": {
       "type": "image",
-      "url": jsonData.tourImageUrl,
+      "url": base_url + jsonData.tourImageUrl,
       'size': 'full',
       'aspectRatio': '20:13',
       'aspectMode': 'cover'

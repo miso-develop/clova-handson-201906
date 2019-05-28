@@ -31,10 +31,10 @@ https://xxx.ngrok.io/linebot
 
 7. LIFFを設定する  
 ・エンドポイントURLに設定する  
-https://xxx.ngrok.io/info  
-https://xxx.ngrok.io/tour  
-https://xxx.ngrok.io/hotel  
-https://xxx.ngrok.io/airline  
+https://xxx.ngrok.io/info.html  
+https://xxx.ngrok.io/tour.html  
+https://xxx.ngrok.io/hotel.html  
+https://xxx.ngrok.io/airline.html  
 https://xxx.ngrok.io/linepay/reserve  
 
 8. 「.env」ファイルを設定する   
@@ -43,7 +43,7 @@ https://xxx.ngrok.io/linepay/reserve
 ・「CHANNEL_ACCESS_TOKEN」と「CHANNEL_SECRET」  
 「6」で生成した「アクセストークン」と「Channel Secret」  
 ・「LINEPAY_CHANNEL_ID」、「LINEPAY_CHANNEL_SECRET」、「LINEPAY_CONFIRM_URL」  
-任意、LINE Payのアカウントお持ちなら設定
+任意、LINE Payのアカウントお持ちなら設定  
 ・「残りのLIFF_URL」  
 「７」で作成したLIFF URL
 
